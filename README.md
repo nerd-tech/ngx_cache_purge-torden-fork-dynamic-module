@@ -25,7 +25,7 @@ Building as Dynamic Module on Ubuntu 20.04 or Ubuntu 22.04
 ===========================
 1) Clone this repository just outside of the Nginx repo directory
 ```
-git clone https://github.com/Danrancan/ngx_cache_purge_dynamic.git
+git clone git@github.com:nerd-tech/ngx_cache_purge-torden-fork-dynamic-module.git
 ```
 2) Install build Essentials and Libraries
 ```
@@ -34,7 +34,7 @@ sudo apt update && sudo apt-get install build-essential libpcre3-dev libssl-dev 
 3) Get your current configure arguments with `nginx -V`
 4) Navigate to your Nginx build directory and execute:
 ```
-sudo ./configure --add-dynamic-module=../ngx_cache_purge_dynamic --with-compat --the-rest-of-your-configure-arguements
+sudo ./configure --add-dynamic-module=../ngx_cache_purge-torden-fork-dynamic-module --with-compat --the-rest-of-your-configure-arguements
 ```
 NOTE: Be sure to add the rest of the configure arguments from the output of `nginx -V` to the `./configure` line above.
 
