@@ -1,3 +1,6 @@
+# Updated Configuration file from MASTER, to enable 
+# building this as a dynamic module.
+
 if [ "$HTTP_PROXY" = "YES" ]; then
     have=NGX_HTTP_PROXY . auto/have
 fi
