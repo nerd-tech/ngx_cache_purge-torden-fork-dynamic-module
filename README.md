@@ -4,6 +4,71 @@ About
 `FastCGI`, `proxy`, `SCGI` and `uWSGI` caches. A purge operation removes the 
 content with the same cache key as the purge request has.
 
+About the Original Module (no forks):
+=====================================
+If you are a Debian or Ubuntu (or derivatives) user, know that **YES** this is the github repository of the module packaged as `libnginx-mod-http-cache-purge` in your distribution. This module is also in use if you use [**Ondřej Surý**'s PPA](https://launchpad.net/~ondrej/+archive/ubuntu/nginx).
+
+About Torden Fork:
+==================
+According to THIS LINK: https://github.com/FRiCKLE/ngx_cache_purge/issues/67#issuecomment-573306150
+The original fork of the ngx_cache_purge module does not work with per site PHP users. It's been well documented.
+Also, PHP will only work if Nginx and the PHP application share the same user.
+Many stacks (ex: EasyEngine) use the original module, and it works correctly. However, EasyEngine and other stacks are are single user stacks.
+The original module won't work on multiuser stacks. Torden's Fork Solves this by allowing this module to work on multi-user stacks.
+If you use the Torden fork, per application cache purging should work fine with multitenancy LEMP stacks while each site is in PHP user isolation.
+
+About Nerd-Tech's Fork (this repo):
+==================
+This fork has modified nothing of Torden's fork except `readme.md` file, and the `config` file to facilitate building this module as a dynamic module only. This is not compatable with building it into Nginx. This fork is only for building a Torden Fork Dynamic module. To build the Module Dynamically, follow the instructions below.
+
+Building as Dynamic Module on Ubuntu 20.04 or Ubuntu 22.04
+===========================
+1) Clone this repository just outside of the Nginx repo directory
+```
+git clone https://github.com/Danrancan/ngx_cache_purge_dynamic.git
+```
+2) Install build Essentials and Libraries
+```
+sudo apt update && sudo apt-get install build-essential libpcre3-dev libssl-dev zlib1g-dev libxml2-dev libxslt1-dev libgd-dev libgeoip-dev 
+```
+3) Get your current configure arguments with `nginx -V`
+4) Navigate to your Nginx build directory and execute:
+```
+sudo ./configure --add-dynamic-module=../ngx_cache_purge_dynamic --with-compat --the-rest-of-your-configure-arguements
+```
+NOTE: Be sure to add the rest of the configure arguments from the output of `nginx -V` to the `./configure` line above.
+
+5) Make modules
+```
+sudo make modules
+```
+Your newly built module will be in `objs/ngx_http_cache_purge_module.so`
+
+6) Move it to /etc/nginx/modules/
+```
+sudo mv objs/ngx_http_cache_purge_module.so /etc/nginx/modules/
+```
+
+7) Enable Nginx Cache Purge Module
+```
+sudo nano /etc/nginx/nginx.conf
+```
+
+8) Add the line `load_module modules/ngx_http_cache_purge_module.so;` to the top of your nginx.conf file.
+```
+user www-data www-data;
+worker_processes auto;
+pid /run/nginx.pid;
+load_module modules/ngx_http_cache_purge_module.so;
+
+http {
+```
+
+9) Restart nginx
+`sudo service nginx restart`
+
+ALL DONE!
+
 
 Sponsors
 ========
