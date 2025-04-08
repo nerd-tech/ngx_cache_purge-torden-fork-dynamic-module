@@ -23,9 +23,14 @@ This fork has modified nothing of Torden's fork except `readme.md` file, and the
 
 Building as Dynamic Module on Ubuntu 20.04 or Ubuntu 22.04
 ===========================
-1) Clone this repository just outside of the Nginx repo directory
+1a) Clone this repository (using ssh) just outside of the Nginx repo directory
 ```
 git clone git@github.com:nerd-tech/ngx_cache_purge-torden-fork-dynamic-module.git
+```
+or
+1b) Clone this repository (using HTTPS) just outside of the Nginx repo directory
+```
+git clone https://github.com/nerd-tech/ngx_cache_purge-torden-fork-dynamic-module.git
 ```
 2) Install build Essentials and Libraries
 ```
