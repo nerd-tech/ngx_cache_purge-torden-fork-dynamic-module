@@ -28,6 +28,7 @@ Building as Dynamic Module on Ubuntu 20.04 or Ubuntu 22.04
 git clone git@github.com:nerd-tech/ngx_cache_purge-torden-fork-dynamic-module.git
 ```
 or
+
 1b) Clone this repository (using HTTPS) just outside of the Nginx repo directory
 ```
 git clone https://github.com/nerd-tech/ngx_cache_purge-torden-fork-dynamic-module.git
